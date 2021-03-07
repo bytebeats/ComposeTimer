@@ -9,5 +9,9 @@
       or implied. See the License for the specific language governing permissions and limitations under
       the License.
       -->
-    <string name="app_name">AndroidDevChallenge</string>
+    <string name="app_name">Timer</string>
+    <string name="h">h</string>
+    <string name="m">m</string>
+    <string name="s">s</string>
+    <string name="count_down">Count down</string>
 </resources>
