@@ -96,15 +96,17 @@ fun CountDownLayout(seconds: Int, darkTheme: Boolean) {
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Button(onClick = {
-                    started.value = !started.value
-                    if (started.value) {
-                        finished.value = false
-                        countDownTimer.start()
-                    } else {
-                        countDownTimer.cancel()
+                Button(
+                    onClick = {
+                        started.value = !started.value
+                        if (started.value) {
+                            finished.value = false
+                            countDownTimer.start()
+                        } else {
+                            countDownTimer.cancel()
+                        }
                     }
-                }) {
+                ) {
                     Text(text = getActionText(started.value), fontSize = 20.sp)
                 }
             }
@@ -118,8 +120,7 @@ fun CountDownLayout(seconds: Int, darkTheme: Boolean) {
                 Box(
                     modifier = Modifier.size(progressSize),
                 ) {
-                    Box(modifier = Modifier.fillMaxSize())
-                    {
+                    Box(modifier = Modifier.fillMaxSize()) {
                         Canvas(
                             modifier = Modifier.fillMaxSize()
                         ) {
