@@ -16,38 +16,57 @@
 package com.example.androiddevchallenge.util
 
 fun getSeconds(time: String?): String {
-    if (time.isNullOrEmpty()) {
-        return "00"
+    return if (time.isNullOrEmpty()) {
+        "00"
+    } else if (time.length > 1) time.takeLast(2) else {
+        "0$time"
     }
-    if (time.length > 1) return time.takeLast(2)
-    return "0$time"
 }
 
 fun getMinutes(time: String?): String {
-    if (time.isNullOrEmpty()) {
-        return "00"
+    return if (time.isNullOrEmpty()) {
+        "00"
+    } else if (time.length < 3) {
+        "00"
+    } else if (time.length >= 4) {
+        time.substring(time.length - 4, time.length - 2)
+    } else {
+        "0${time.first()}"
     }
-    if (getSeconds(time).startsWith("0")) return "00"
-    if (time.length >= 4) return time.substring(time.length - 4, time.length - 2)
-    return "0${time.first()}"
 }
 
 fun getHours(time: String?): String {
-    if (time.isNullOrEmpty()) {
-        return "00"
+    return if (time.isNullOrEmpty()) {
+        "00"
+    } else if (time.length < 5) {
+        "00"
+    } else if (time.length >= 6) {
+        time.substring(time.length - 6, time.length - 4)
+    } else {
+        "0${time.first()}"
     }
-    if (getMinutes(time).startsWith("0")) return "00"
-    if (time.length >= 6) return time.substring(time.length - 6, time.length - 4)
-    return "0${time.first()}"
 }
 
 fun calculate(time: String, d: Char): String {
     return if (time.isEmpty()) {
-        if (d != '0') "$time$d"
+        if (d != '0') "$d"
         else time
     } else if (time.length >= 6) {
         time
     } else {
         "$time$d"
+    }
+}
+
+fun getFullTime(seconds: Int): String {
+    val s = seconds % 100
+    val m = seconds / 100 % 100
+    val h = seconds / 10000 % 100
+    return if (h > 0) {
+        "${if (h < 10) "0$h" else h.toString()}:${if (m < 10) "0$m" else m.toString()}:${if (s < 10) "0$s" else s.toString()}"
+    } else if (m > 0) {
+        "${if (m < 10) "0$m" else m.toString()}:${if (s < 10) "0$s" else s.toString()}"
+    } else {
+        if (s < 10) "0$s" else s.toString()
     }
 }
